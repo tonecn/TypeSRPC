@@ -1,0 +1,50 @@
+{
+  "name": "typesrpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest __tests__/unit",
+    "test:integration": "jest __tests__/integration",
+    "test:e2e": "jest __tests__/e2e",
+    "test:coverage": "jest --coverage",
+    "build": "tsc",
+    "start": "tsc && tsc-alias && node dist/index.js"
+  },
+  "keywords": [
+    "rpc",
+    "typescript",
+    "remote-procedure-call",
+    "socket",
+    "realtime",
+    "type-safe",
+    "nested-api",
+    "bidirectional",
+    "pluggable",
+    "socket.io",
+    "websocket",
+    "microservices",
+    "client-server",
+    "lightweight"
+  ],
+  "author": "tonecn",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/md5": "^2.3.5",
+    "express": "^5.1.0",
+    "md5": "^2.3.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.15",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.2"
+  }
+}

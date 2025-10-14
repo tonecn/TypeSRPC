@@ -1,0 +1,1 @@
+export type RPCProvider = { [key: string]: RPCProvider | Function | any };
