@@ -27,7 +27,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tonecn/typesrpc.git"
+    "url": "git+https://github.com/tonecn/typesrpc.git"
   },
   "bugs": {
     "url": "https://github.com/tonecn/typesrpc/issues"
