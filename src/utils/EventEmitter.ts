@@ -19,24 +19,22 @@ export class BaseEventEmitter<T extends EventType> {
         listener: (args: T[K]) => void,
         once?: boolean
     }) {
+        const self = this;
         if (!this.events.has(event)) {
             this.events.set(event, new Set());
         }
 
-        const fn = args.once ? (data: T[K]) => {
+        const fn = args.once ? function onceHandler(data: T[K]) {
             listener(data);
-            this.off(event, fn);
+            self.off(event, onceHandler);
         } : listener;
 
         this.events.get(event)!.add(fn);
+        return this;
     }
 
     public off<K extends keyof T>(event: K, listener: (args: T[K]) => void) {
-        if (!this.events.has(event)) {
-            return;
-        }
-
-        this.events.get(event)!.delete(listener);
+        this.events.get(event)?.delete(listener);
         return this;
     }
 
