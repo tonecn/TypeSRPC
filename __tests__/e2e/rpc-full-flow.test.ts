@@ -56,7 +56,7 @@ describe('Rpc full flow test', () => {
         server.setProvider(serverProvider)
         await server.listen();
 
-        server.on('connnect', (rpcSession) => {
+        server.on('connect', (rpcSession) => {
             clientAPI = rpcSession.getAPI<ClientProvider>();
         })
 
