@@ -14,18 +14,31 @@ interface RPCConnectionEvents {
     closed: void;
 }
 
+class CallResponseEmitter extends EventEmitter<{
+    [id: string]: RPCPacket;
+}> {
+    emitAll(packet: RPCPacket) {
+        this.events.forEach(subscribers => {
+            subscribers.forEach(fn => fn(packet));
+        })
+    }
+}
+
 export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
 
     closed: boolean = false;
 
-    private callResponseEmitter = new EventEmitter<{
-        [id: string]: RPCPacket;
-    }>();
+    private callResponseEmitter = new CallResponseEmitter();
 
     constructor(public socket: SocketConnection) {
         super();
         socket.on('closed', () => {
             this.emit('closed');
+            this.callResponseEmitter.emitAll(makeCallResponsePacket({
+                status: 'error',
+                requestPacketId: 'connection error',
+                errorCode: RPCErrorCode.CONNECTION_DISCONNECTED,
+            }));
             this.callResponseEmitter.removeAllListeners();
             this.closed = true;
         });
@@ -68,6 +81,12 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
         args: any[];
         timeout: number;
     }): Promise<any> {
+        if (this.closed) {
+            throw new RPCError({
+                errorCode: RPCErrorCode.CONNECTION_DISCONNECTED,
+            });
+        }
+
         const { fnPath, args } = options;
         const packet = makeCallPacket({
             fnPath,

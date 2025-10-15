@@ -9,6 +9,7 @@ export enum RPCErrorCode {
     HANDSHAKE_INCOMPLETE = -400,
     TIMEOUT_ERROR = -500,
     CALL_PROTOCOL_ERROR = -600,
+    CONNECTION_DISCONNECTED = -700,
 }
 
 export const RPC_ERROR_MESSAGES: Record<RPCErrorCode | number, string> = {
@@ -22,6 +23,7 @@ export const RPC_ERROR_MESSAGES: Record<RPCErrorCode | number, string> = {
     [RPCErrorCode.HANDSHAKE_INCOMPLETE]: 'Handshake not completed',
     [RPCErrorCode.TIMEOUT_ERROR]: 'Request timeout',
     [RPCErrorCode.CALL_PROTOCOL_ERROR]: 'Call protocol error',
+    [RPCErrorCode.CONNECTION_DISCONNECTED]: 'Connection disconnected',
 } as const;
 
 export class RPCError extends Error {

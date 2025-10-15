@@ -2,7 +2,7 @@ type EventType = Record<string, any>;
 
 export class BaseEventEmitter<T extends EventType> {
 
-    private events: Map<keyof T, Set<(args: any) => void>> = new Map();
+    protected events: Map<keyof T, Set<(args: any) => void>> = new Map();
 
     public on<K extends keyof T>(event: K, listener: (args: T[K]) => void) {
         this.addListener({ event, listener });
