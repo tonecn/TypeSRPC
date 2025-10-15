@@ -110,11 +110,6 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
             return () => clearTimeout(t);
         })();
 
-        promise.finally(() => {
-            this.callResponseEmitter.removeAllListeners(packet.id);
-            cancelTimeoutTimer();
-        })
-
         const handleCallResponsePacket = (packet: RPCPacket) => {
             const result = parseCallResponsePacket(packet);
             if (result === null) {
@@ -144,7 +139,10 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
         /** send call request */
         this.socket.send(packet);
 
-        return promise;
+        return promise.finally(() => {
+            this.callResponseEmitter.removeAllListeners(packet.id);
+            cancelTimeoutTimer();
+        });
     }
 
     public onCallRequest(getProvider: () => RPCProvider | undefined) {
@@ -219,5 +217,9 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
         } catch (error) {
             return null;
         }
+    }
+
+    public async close() {
+        return this.socket.close();
     }
 }
