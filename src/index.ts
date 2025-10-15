@@ -10,6 +10,7 @@ export { RPCSession } from "./core/RPCSession";
 export { SocketClient } from "./core/SocketClient";
 export { SocketConnection } from "./core/SocketConnection";
 export { SocketServer } from "./core/SocketServer";
+export { EventEmitter } from "./utils/EventEmitter";
 
 export { injectSocketClient } from "./core/SocketClient";
 export { injectSocketServer } from "./core/SocketServer";
