@@ -15,11 +15,11 @@
 ## 📦 安装
 
 ```bash
-npm install typesrpc
+npm install @tonecn/typesrpc
 # 或
-yarn add typesrpc
+yarn add @tonecn/typesrpc
 # 或
-pnpm add typesrpc
+pnpm add @tonecn/typesrpc
 ```
 
 ## 🚀 快速开始
@@ -71,7 +71,7 @@ const clientProvider = {
 ### 2. 设置服务端与客户端
 
 ```ts
-import { RPCHandler } from 'typesrpc';
+import { RPCHandler } from '@tonecn/typesrpc';
 
 // 服务端
 const server = new RPCHandler();
@@ -142,7 +142,7 @@ TypeSRPC 支持可插拔的传输层。默认使用 **Socket.IO**，但你可以
 
 ```ts
 // my-socket-impl/index.ts
-import { injectSocketClient, injectSocketServer } from 'typesrpc';
+import { injectSocketClient, injectSocketServer } from '@tonecn/typesrpc';
 import { MySocketClient } from './MySocketClient';
 import { MySocketServer } from './MySocketServer';
 

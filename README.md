@@ -15,11 +15,11 @@
 ## 📦 Installation
 
 ```bash
-npm install typesrpc
+npm install @tonecn/typesrpc
 # or
-yarn add typesrpc
+yarn add @tonecn/typesrpc
 # or
-pnpm add typesrpc
+pnpm add @tonecn/typesrpc
 ```
 
 ## 🚀 Quick Start
@@ -71,7 +71,7 @@ const clientProvider = {
 ### 2. Set Up Server & Client
 
 ```ts
-import { RPCHandler } from 'typesrpc';
+import { RPCHandler } from '@tonecn/typesrpc';
 
 // Server
 const server = new RPCHandler();
@@ -142,7 +142,7 @@ TypeSRPC supports pluggable transport layers. By default, it uses **Socket.IO**,
 
 ```ts
 // my-socket-impl/index.ts
-import { injectSocketClient, injectSocketServer } from 'typesrpc';
+import { injectSocketClient, injectSocketServer } from '@tonecn/typesrpc';
 import { MySocketClient } from './MySocketClient';
 import { MySocketServer } from './MySocketServer';
 
