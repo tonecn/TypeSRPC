@@ -1,4 +1,4 @@
-import { isObject, isString, makeId } from "@/utils/utils"
+import { getRandomAvailablePort, isObject, isString, makeId } from "@/utils/utils"
 
 test('makeId', () => {
     const id = makeId();
@@ -20,4 +20,10 @@ test('isString', () => {
     expect(isString(str)).toBeTruthy();
     const aNumber = 1;
     expect(isString(aNumber)).toBeFalsy();
+})
+
+test('getRandomAvailablePort', async () => {
+    const port = await getRandomAvailablePort();
+    expect(port).toBeGreaterThanOrEqual(1);
+    expect(port).toBeLessThanOrEqual(65535);
 })

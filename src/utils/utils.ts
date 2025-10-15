@@ -15,3 +15,30 @@ export type ToDeepPromise<T> = {
     ? ToDeepPromise<T[K]>
     : T[K]
 };
+
+export async function getRandomAvailablePort() {
+    const { createServer } = await import('http');
+    const server = createServer();
+
+    return new Promise((resolve, reject) => {
+        server.on('listening', () => {
+            const address = server.address();
+            if (address && isObject(address)) {
+                const port = address.port;
+                server.close(() => {
+                    resolve(port);
+                })
+            } else {
+                server.close();
+                reject(new Error('Failed to get port'));
+            }
+        });
+
+        server.on('error', (err) => {
+            server.close();
+            reject(err);
+        });
+
+        server.listen(0);
+    })
+}
