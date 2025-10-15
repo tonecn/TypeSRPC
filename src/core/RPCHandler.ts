@@ -16,7 +16,7 @@ const DefaultConnectOptions = {
 } as const;
 
 interface RPCHandlerEvents {
-    connnect: RPCSession;
+    connect: RPCSession;
 }
 
 export class RPCHandler extends EventEmitter<RPCHandlerEvents> {
@@ -92,7 +92,7 @@ export class RPCHandler extends EventEmitter<RPCHandlerEvents> {
             ...options,
         }).finally(() => {
             rpcServer.on('connect', rpcSession => {
-                this.emit('connnect', rpcSession);
+                this.emit('connect', rpcSession);
             })
         });
     }
