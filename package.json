@@ -1,35 +1,38 @@
 {
-  "name": "typesrpc",
+  "name": "@tonecn/typesrpc",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A lightweight, type-safe RPC framework for TypeScript with deep nested API support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "test:unit": "jest __tests__/unit",
     "test:integration": "jest __tests__/integration",
     "test:e2e": "jest __tests__/e2e",
     "test:coverage": "jest --coverage",
-    "build": "tsc",
-    "start": "tsc && tsc-alias && node dist/index.js"
+    "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "start": "npm run build && tsc-alias && node dist/index.js"
   },
   "keywords": [
     "rpc",
     "typescript",
-    "remote-procedure-call",
-    "socket",
-    "realtime",
-    "type-safe",
-    "nested-api",
-    "bidirectional",
-    "pluggable",
     "socket.io",
-    "websocket",
-    "microservices",
-    "client-server",
-    "lightweight"
+    "type-safe",
+    "remote-procedure-call"
   ],
   "author": "tonecn",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonecn/typesrpc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tonecn/typesrpc/issues"
+  },
+  "homepage": "https://github.com/tonecn/typesrpc#readme",
   "dependencies": {
     "@types/express": "^5.0.3",
     "@types/md5": "^2.3.5",
