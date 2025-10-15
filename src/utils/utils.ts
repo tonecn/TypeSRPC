@@ -10,7 +10,7 @@ export type ObjectType = Record<string, any>;
 
 export type ToDeepPromise<T> = {
     [K in keyof T]: T[K] extends (...args: infer P) => infer R
-    ? (...args: P) => Promise<R>
+    ? (...args: P) => Promise<Awaited<R>>
     : T[K] extends object
     ? ToDeepPromise<T[K]>
     : T[K]
