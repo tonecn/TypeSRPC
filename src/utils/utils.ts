@@ -20,7 +20,7 @@ export async function getRandomAvailablePort() {
     const { createServer } = await import('http');
     const server = createServer();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<number>((resolve, reject) => {
         server.on('listening', () => {
             const address = server.address();
             if (address && isObject(address)) {
