@@ -78,6 +78,7 @@ export class RPCServer extends EventEmitter<RPCServerEvents> {
                     this.emit('connect', new RPCSession(
                         new RPCConnection(socketConnection),
                         this.rpcHandler,
+                        this,
                     ));
                 }
 

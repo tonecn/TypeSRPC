@@ -85,6 +85,7 @@ export class RPCClient {
                     resolve(new RPCSession(
                         new RPCConnection(connection!),
                         this.rpcHandler,
+                        this,
                     ));
                 } else {
                     reject(new Error('Server rejected handshake request'));

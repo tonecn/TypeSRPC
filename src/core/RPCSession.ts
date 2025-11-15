@@ -2,6 +2,8 @@ import { ToDeepPromise } from "@/utils/utils";
 import { RPCConnection } from "./RPCConnection";
 import { RPCHandler } from "./RPCHandler";
 import { RPCProvider } from "./RPCProvider";
+import { RPCClient } from "./RPCClient";
+import { RPCServer } from "./RPCServer";
 
 
 export class RPCSession {
@@ -9,7 +11,9 @@ export class RPCSession {
     constructor(
         public readonly connection: RPCConnection,
         public readonly rpcHandler: RPCHandler,
+        public readonly provider: RPCClient | RPCServer,
     ) {
+        connection.setRPCSession(this);
         connection.onCallRequest(rpcHandler.getProvider.bind(rpcHandler));
     }
 

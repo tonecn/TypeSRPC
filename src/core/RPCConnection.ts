@@ -4,6 +4,7 @@ import { RPCPacket } from "./RPCPacket";
 import { makeCallPacket, makeCallResponsePacket, parseCallPacket, parseCallResponsePacket } from "./RPCCommon";
 import { RPCProvider } from "./RPCProvider";
 import { RPCError, RPCErrorCode } from "./RPCError";
+import { RPCSession } from "./RPCSession";
 
 interface RPCConnectionEvents {
     call: RPCPacket;
@@ -29,6 +30,7 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
     closed: boolean = false;
 
     private callResponseEmitter = new CallResponseEmitter();
+    private rpcSession!: RPCSession;
 
     constructor(public socket: SocketConnection) {
         super();
@@ -73,6 +75,10 @@ export class RPCConnection extends EventEmitter<RPCConnectionEvents> {
         this.on('callResponse', (packet) => {
             this.callResponseEmitter.emit(packet.id, packet);
         })
+    }
+
+    public setRPCSession(session: RPCSession) {
+        this.rpcSession = session;
     }
 
     /** @throws */
