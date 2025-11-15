@@ -16,6 +16,8 @@ export { injectSocketClient } from "./core/SocketClient";
 export { injectSocketServer } from "./core/SocketServer";
 import { injectSocketIOImplements } from "./implements/socket.io";
 
+export { publicMethod, isPublicMethod, markAsPublicMethod } from './utils/utils';
+
 injectSocketIOImplements();
 
 export {

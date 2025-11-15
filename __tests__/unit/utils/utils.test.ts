@@ -1,4 +1,4 @@
-import { getRandomAvailablePort, isObject, isString, makeId } from "@/utils/utils"
+import { getRandomAvailablePort, isObject, isPublicMethod, isString, makeId, markAsPublicMethod } from "@/utils/utils"
 
 test('makeId', () => {
     const id = makeId();
@@ -26,4 +26,29 @@ test('getRandomAvailablePort', async () => {
     const port = await getRandomAvailablePort();
     expect(port).toBeGreaterThanOrEqual(1);
     expect(port).toBeLessThanOrEqual(65535);
+})
+
+test('markAsPublick', () => {
+    const shallowObj = {
+        fn1() { },
+        l1: {
+            fn1() { },
+        }
+    };
+
+    const deepObj = {
+        fn1() { },
+        l1: {
+            fn1() { },
+        }
+    };
+
+    markAsPublicMethod(shallowObj);
+    markAsPublicMethod(deepObj, { deep: true });
+
+    expect(isPublicMethod(shallowObj.fn1)).toBeTruthy();
+    expect(isPublicMethod(shallowObj.l1.fn1)).toBeUndefined();
+
+    expect(isPublicMethod(deepObj.fn1)).toBeTruthy();
+    expect(isPublicMethod(deepObj.l1.fn1)).toBeTruthy();
 })
