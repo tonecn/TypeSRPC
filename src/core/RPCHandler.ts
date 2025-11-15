@@ -19,28 +19,47 @@ interface RPCHandlerEvents {
     connect: RPCSession;
 }
 
+interface RPCConfig {
+    enableMethodProtection: boolean;
+}
+
+let DefaultRPCConfig: RPCConfig = {
+    enableMethodProtection: false,
+}
+
 export class RPCHandler extends EventEmitter<RPCHandlerEvents> {
 
     private rpcClient?: RPCClient;
     private rpcServer?: RPCServer;
     private provider?: RPCProvider;
     private accessKey?: string;
+    private config: RPCConfig;
 
     constructor(
         args?: {
             rpcClient?: RPCClient;
             rpcServer?: RPCServer;
-        }
+        } & Partial<RPCConfig>
     ) {
         super();
+        const { rpcClient, rpcServer, ...config } = args ?? {};
 
-        if (args?.rpcClient) {
-            this.setRPCProvider(args.rpcClient);
+        if (rpcClient) {
+            this.setRPCProvider(rpcClient);
         }
 
-        if (args?.rpcServer) {
-            this.setRPCProvider(args.rpcServer);
+        if (rpcServer) {
+            this.setRPCProvider(rpcServer);
         }
+
+        this.config = {
+            ...DefaultRPCConfig,
+            ...config,
+        }
+    }
+
+    getConfig() {
+        return this.config;
     }
 
     setProvider<T extends RPCProvider>(provider: T) {
