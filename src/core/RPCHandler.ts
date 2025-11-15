@@ -117,26 +117,3 @@ export class RPCHandler extends EventEmitter<RPCHandlerEvents> {
         }
     }
 }
-
-
-// const h = new RPCHandler();
-
-// h.setProvider<{
-//     plus: (a: number, b: number) => number;
-//     math: {
-//         minus: (a: number, b: number) => number;
-//         multiply: (a: number, b: number) => number;
-//     }
-// }>({
-//     plus(a, b) {
-//         return a + b
-//     },
-//     math: {
-//         minus(a, b) {
-//             return a - b;
-//         },
-//         multiply(a, b) {
-//             return a * b;
-//         },
-//     }
-// })
